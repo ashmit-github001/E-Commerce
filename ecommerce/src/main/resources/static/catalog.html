@@ -2,7 +2,14 @@
 <html>
 <head>
 	<title> Products </title>
-	<style>
+	<style>	
+		.top-nav-bar{
+			background: purple;
+		}
+		
+		.search-bar{
+			text-align: center;
+		}
 		.products-container {
 			display: flex;
 			flex-wrap: wrap;
@@ -38,15 +45,25 @@
 	</style>
 </head>
 
-<body onload="onPageLoad()">
+<body onload="fetchAllProducts()">
+
+	<div class="top-nav-bar">
+		<div class="search-bar">
+			<form onsubmit="fetchProductsByKeywords(event)" >
+				<input type="text" id="item-keywords" />
+				<input type="submit" id="btn-item-keywords" value="Search" />
+			</form>
+		</div>
+	</div>
+	
 	<h3> Our Products </h3>
 	
-	<form>
-		<div class="products-container">
-		</div>
-		
-		<button> Proceed to Cart </button>
-	</form>
+	<div>
+		<form>
+			<div class="products-container"></div>		
+			<button> Proceed to Cart </button>
+		</form>	
+	</div>
 	
 	<script src="/js/catalog.js"></script>
 	

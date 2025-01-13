@@ -20,4 +20,11 @@ public class CatalogService {
 		
 		return catalogRepository.findAll();
 	}
+	
+	public List<CatalogItem> getProductsByKeywords(String keywords) {
+		
+		System.out.println(keywords);
+		//String[] uniqueKeywords = keywords.split(" ");
+		return catalogRepository.findAllByCategory(keywords);
+	}
 }
