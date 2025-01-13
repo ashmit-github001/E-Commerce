@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ashmitagarwal.ecommerce.entity.CatalogItem;
+import com.ashmitagarwal.ecommerce.entity.CatalogProducts;
 import com.ashmitagarwal.ecommerce.repository.CatalogRepository;
 
 @Service
@@ -16,12 +16,12 @@ public class CatalogService {
 		this.catalogRepository = catalogRepository;
 	}
 	
-	public List<CatalogItem> getFullCatalog() {
+	public List<CatalogProducts> getFullCatalog() {
 		
 		return catalogRepository.findAll();
 	}
 	
-	public List<CatalogItem> getProductsByKeywords(String keywords) {
+	public List<CatalogProducts> getProductsByKeywords(String keywords) {
 		
 		System.out.println(keywords);
 		//String[] uniqueKeywords = keywords.split(" ");

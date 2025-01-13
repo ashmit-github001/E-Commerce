@@ -1,44 +1,44 @@
-const displayProducts = (products, itemKeywords) => {
+const displayProducts = (products, userKeywords) => {
 	console.log("Products = " + products);
 	const catalogDiv = document.querySelector('.products-container');
 	
-	if(itemKeywords != null){
+	if(userKeywords != null){
 		[... catalogDiv.children].forEach(c => c.remove());
 	}
 	
 	products.forEach(product => {
 		console.log(product);
-		const itemDiv = document.createElement('div');
-		itemDiv.setAttribute("class", "item-div");
+		const productDiv = document.createElement('div');
+		productDiv.setAttribute("class", "product-div");
 		
 		const productName = document.createElement('h4');
-		productName.id = "item-name";
+		productName.id = "product-name";
 		productName.innerText = `${product.name}`;
-		itemDiv.appendChild(productName);
+		productDiv.appendChild(productName);
 		
 		const productSeller = document.createElement('p');
-		productSeller.id = "item-seller";
+		productSeller.id = "product-seller";
 		productSeller.innerHTML = `Sold by: <b>${product.seller}</b>`;
-		itemDiv.appendChild(productSeller);
+		productDiv.appendChild(productSeller);
 		
 		const productImage = document.createElement('img');
-		productImage.id = "item-image";
+		productImage.id = "product-image";
 		productImage.innerHTML = `${product.image}`;
-		itemDiv.appendChild(productImage);
+		productDiv.appendChild(productImage);
 		
 		const productPrice = document.createElement('h4');
-		productPrice.id = "item-price";
+		productPrice.id = "product-price";
 		productPrice.innerText = `Rs. ${product.price}`;
-		itemDiv.appendChild(productPrice);
+		productDiv.appendChild(productPrice);
 		
 		const addToCartButton = document.createElement('input');
 		addToCartButton.type = "button";
 		addToCartButton.id = "add-to-card";
 		addToCartButton.value = "Add to Cart";
 		addToCartButton.onclick = addtoCart(product);
-		itemDiv.appendChild(addToCartButton);
+		productDiv.appendChild(addToCartButton);
 		
-		catalogDiv.appendChild(itemDiv);
+		catalogDiv.appendChild(productDiv);
 	});
 };
 
@@ -50,10 +50,10 @@ function fetchAllProducts() {
 
 function fetchProductsByKeywords(event){
 	event.preventDefault();
-	const itemKeywords = document.getElementById("item-keywords").value;
-	fetch(`http://localhost:8080/getProductsByKeywords?keywords=${itemKeywords}`)
+	const userKeywords = document.getElementById("product-keywords").value;
+	fetch(`http://localhost:8080/getProductsByKeywords?keywords=${userKeywords}`)
 	.then(response => response.json())
-	.then(products => displayProducts(products, itemKeywords));
+	.then(products => displayProducts(products, userKeywords));
 };
 
 function addtoCart(product) {

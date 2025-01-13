@@ -16,29 +16,29 @@
 			justify-content: space-evenly;
 		}
 		
-		.item-div {
+		.product-div {
 			flex: 0 0 25%;
 			margin: 10px;
 			border: 2px solid black;
   			padding: 10px;			
 		}
 		
-		.item-div #item-name, .item-div #item-seller  {
+		.product-div #product-name, .product-div #product-seller  {
 			width: 200px;
 			height: 10px;
 		}
 		
-		.item-div #item-image{
+		.product-div #product-image{
 			width: 200px;
 			height: 200px;
 		}
 		
-		.item-div #item-price  {
+		.product-div #product-price  {
 			width: 100px;
 			height: 20px;
 		}
 		
-		.item-div #add-to-cart  {
+		.product-div #add-to-cart  {
 			width: 100px;
 			height: 40px;
 		}
@@ -50,8 +50,8 @@
 	<div class="top-nav-bar">
 		<div class="search-bar">
 			<form onsubmit="fetchProductsByKeywords(event)" >
-				<input type="text" id="item-keywords" />
-				<input type="submit" id="btn-item-keywords" value="Search" />
+				<input type="text" id="product-keywords" />
+				<input type="submit" id="btn-search-keywords" value="Search" />
 			</form>
 		</div>
 	</div>

@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class CatalogItem {
+public class CatalogProducts {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
