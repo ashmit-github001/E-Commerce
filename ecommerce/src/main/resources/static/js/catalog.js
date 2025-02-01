@@ -1,3 +1,5 @@
+let productSelected = null;
+
 const displayProducts = (products, userKeywords) => {
 	console.log("Products = " + products);
 	const catalogDiv = document.querySelector('.products-container');
@@ -33,9 +35,8 @@ const displayProducts = (products, userKeywords) => {
 		
 		const addToCartButton = document.createElement('input');
 		addToCartButton.type = "button";
-		addToCartButton.id = "add-to-card";
 		addToCartButton.value = "Add to Cart";
-		addToCartButton.onclick = addtoCart(product);
+		addToCartButton.onclick = () => addtoCart(product); // Why this nesting of function is needed?
 		productDiv.appendChild(addToCartButton);
 		
 		catalogDiv.appendChild(productDiv);
@@ -57,5 +58,15 @@ function fetchProductsByKeywords(event){
 };
 
 function addtoCart(product) {
+	console.log("addtoCart function is called = " + product.name)
+	fetch("http://localhost:8080/cart/add",
+	{
+		method: 'POST',
+		body: JSON.stringify({
+			"productId": product.id
+		})
+	})
+	.then(response => response.json())
+	.then(result => console.log(`Add to cart result for product ${product.name} is ${result}`));
 	
 };
