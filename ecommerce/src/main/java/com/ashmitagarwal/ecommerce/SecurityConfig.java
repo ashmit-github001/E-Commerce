@@ -40,9 +40,11 @@ public class SecurityConfig {
 		
 		UserDetails userDetails1 = User
 				.withUsername("ram")
-				.passwordEncoder(password -> passwordEncoder().encode(password)) //OR .passwordEncoder(passwordEncoder()::encode)
+				.passwordEncoder(password -> passwordEncoder().encode(password)) 
+				//OR .passwordEncoder(passwordEncoder()::encode)
 				.password("test")
-				.roles("USER")
+				//OR .password(passwordEncoder().encode("test")) without .passwordEncoder(...)
+				//.roles("USER")
 				.build();
 
 		return new InMemoryUserDetailsManager(userDetails1);

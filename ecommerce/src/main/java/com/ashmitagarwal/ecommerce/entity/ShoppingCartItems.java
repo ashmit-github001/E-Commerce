@@ -9,22 +9,30 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 
 @Entity
-public class ShoppingCart {
+public class ShoppingCartItems {
 	
 	@EmbeddedId
 	private ShoppingCartPk shoppingCartId;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id")
 	@MapsId("productId")
+	@JoinColumn(name = "product_id")
 	private CatalogProducts product;
 	
 	@ManyToOne()
-	@JoinColumn(name = "user_id")
 	@MapsId("userId")
-	private UserDetails user;
+	@JoinColumn(name = "customer_id")
+	private Customers customer;
 	
 	private int quantity;
+	
+	public ShoppingCartPk getShoppingCartId() {
+		return shoppingCartId;
+	}
+
+	public void setShoppingCartId(ShoppingCartPk shoppingCartId) {
+		this.shoppingCartId = shoppingCartId;
+	}
 
 	public CatalogProducts getProduct() {
 		return product;
@@ -32,6 +40,14 @@ public class ShoppingCart {
 
 	public void setProduct(CatalogProducts product) {
 		this.product = product;
+	}
+
+	public Customers getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customers customer) {
+		this.customer = customer;
 	}
 
 	public int getQuantity() {
@@ -42,4 +58,14 @@ public class ShoppingCart {
 		this.quantity = quantity;
 	}
 
+	public ShoppingCartItems() {
+		
+	}
+	
+	public ShoppingCartItems(CatalogProducts product, Customers customer, int quantity) {
+		this.shoppingCartId = new ShoppingCartPk(product.getId(), customer.getId());
+		this.product = product;
+		this.customer = customer;
+		this.quantity = quantity;
+	}
 }
