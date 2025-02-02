@@ -1,8 +1,7 @@
 package com.ashmitagarwal.ecommerce.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,24 +37,24 @@ public class ShoppingCartService {
 		Map<?,?> productIdObj = mapper.readValue(addToCartDetails, Map.class);
 		String productId = (String) productIdObj.get("productId");
 		System.out.println("Product id to add to cart :" + productId);
+			
+		Optional<CatalogProducts> product = catalogRepository.findById(productId);
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
 		System.out.println("Username of customer for add to cart :" + userDetails.getUsername());
 		
-		Customers cust = customerRepository.findByUsername(userDetails.getUsername());
-		System.out.println("Customer found in db : " + cust);
+		Optional<Customers> cust = customerRepository.findByEmail(userDetails.getUsername());
 		
-		List<String> ids = new ArrayList<>();
-		ids.add(productId);		
-		List<CatalogProducts> products = catalogRepository.findAllById(ids);
-		System.out.println("No. of products found with this id: "  + products.size());
-		
-		if(products != null && !products.isEmpty()) {
+		if(product.isPresent() && cust.isPresent()) {
 			
-			CatalogProducts product = products.get(0);
+			Customers customer = cust.get();
+			System.out.println("Customer found in db : " + customer);
 			
-			ShoppingCartItems cartItem = new ShoppingCartItems(product, cust, 1);
+			CatalogProducts catalogProduct = product.get();
+			System.out.println("Product found with this id: "  + catalogProduct);
+			
+			ShoppingCartItems cartItem = new ShoppingCartItems(catalogProduct, customer, 1);
 			
 			if(shoppingCartRepository.save(cartItem) != null)
 				return true;

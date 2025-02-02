@@ -1,5 +1,7 @@
 package com.ashmitagarwal.ecommerce.entity;
 
+import com.ashmitagarwal.ecommerce.dto.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ public class Customers {
 	private String fullName;
 	
 	@Column(nullable = false, unique = true)
-	private String username;
+	private String email;
 	
 	@Column(columnDefinition = "VARCHAR(500) NOT NULL")
 	private String password;
@@ -38,12 +40,12 @@ public class Customers {
 		this.fullName = fullName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -52,5 +54,15 @@ public class Customers {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Customers() {
+		
+	}
+	
+	public Customers(UserDTO userDto) {
+		this.fullName = userDto.getFullName();
+		this.email = userDto.getEmail();
+		this.password = userDto.getPassword();
 	}
 }
