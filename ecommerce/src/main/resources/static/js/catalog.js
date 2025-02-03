@@ -50,7 +50,7 @@ function fetchAllProducts() {
 };
 
 function fetchProductsByKeywords(event){
-	event.preventDefault();
+	event.preventDefault(); // Will prevent the call of fetchAllProducts on page load after form submit
 	const userKeywords = document.getElementById("product-keywords").value;
 	fetch(`http://localhost:8080/getProductsByKeywords?keywords=${userKeywords}`)
 	.then(response => response.json())

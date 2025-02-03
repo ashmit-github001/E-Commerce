@@ -5,14 +5,16 @@
   </head>
   
   <body>
-  	<form action="/register" method=POST>
+  	<form id="registerForm" onsubmit="registerUser(event)">
   		<label for="fullName"> Full Name </label><br>
   		<input type="text" id="fullName" name="fullName" required/><br><br>
-  		<label for="username"> UserName </label><br>
-  		<input type="text" id="username" name="username" required/><br><br>
+  		<label for="email"> Email </label><br>
+  		<input type="text" id="email" name="email" required/><br><br>
   		<label for="password"> Password </label><br>
   		<input type="password" id="password" name="password" required/><br><br>
   		<input type="submit" id="submitBtn" value="Register"/>
   	</form>
+  	
+  	<script src = "/js/user.js"></script>
   </body>
 </html>

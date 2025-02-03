@@ -21,8 +21,9 @@ public class SecurityConfig {
 		httpSecurity
 		.authorizeHttpRequests(customizer -> {
 			customizer
-			.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
 			.requestMatchers("/login.html", "/register.html").permitAll()
+			.requestMatchers("/js/*").permitAll()
+			.requestMatchers("/user/*").permitAll()
 			.anyRequest().authenticated();
 		})
 		.formLogin(customizer -> {
