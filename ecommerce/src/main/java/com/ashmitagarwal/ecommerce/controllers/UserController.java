@@ -17,8 +17,14 @@ public class UserController {
 	UserController(UserService userService){
 		this.userService = userService;
 	}
+	
 	@PostMapping("/register")
 	public String registerUser(@RequestBody UserDTO userDto) {
 		return userService.registerUser(userDto);
+	}
+	
+	@PostMapping("/login")
+	public String loginUser(@RequestBody UserDTO userDto) {
+		return userService.loginUser(userDto);
 	}
 }

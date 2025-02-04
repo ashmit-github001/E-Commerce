@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ashmitagarwal.ecommerce.dto.UserDTO;
-import com.ashmitagarwal.ecommerce.entity.Customers;
+import com.ashmitagarwal.ecommerce.entity.Customer;
 import com.ashmitagarwal.ecommerce.repository.CustomerRepository;
 
 @Service
@@ -24,19 +24,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String registerUser(UserDTO userDto) {
 		
-		Optional<Customers> cust = customerRepository.findByEmail(userDto.getEmail());
+		Optional<Customer> cust = customerRepository.findByEmail(userDto.getEmail());
 		if(cust.isPresent())
 			return "User already exists!";
 		else {
 			userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-			customerRepository.save(new Customers(userDto));
+			customerRepository.save(new Customer(userDto));
 			return "User registered successfully!";
 		}
 	}
 
-//	@Override
-//	public void LoginUser(UserDTO userDto) {
-//		
-//	}
+	@Override
+	public String loginUser(UserDTO userDto) {
+		
+		Optional<Customer> cust = customerRepository.findByEmail(userDto.getEmail());
+		if(cust.isPresent()) {
+		}
+		
+		return null;
+		
+	}
 
 }

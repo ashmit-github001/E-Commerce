@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ashmitagarwal.ecommerce.entity.CatalogProducts;
+import com.ashmitagarwal.ecommerce.entity.CatalogProduct;
 import com.ashmitagarwal.ecommerce.service.CatalogService;
 
 @RestController
@@ -19,12 +19,12 @@ public class CatalogController {
 	}
 	
 	@GetMapping("/allProducts")
-	public List<CatalogProducts> getFullCatalog() {
+	public List<CatalogProduct> getFullCatalog() {
 		return catalogService.getFullCatalog();
 	}
 	
 	@GetMapping("/getProductsByKeywords")
-	public List<CatalogProducts> getProductsByKeywords(@RequestParam("keywords") String keywords) {
+	public List<CatalogProduct> getProductsByKeywords(@RequestParam("keywords") String keywords) {
 		return catalogService.getProductsByKeywords(keywords);
 	}
 }

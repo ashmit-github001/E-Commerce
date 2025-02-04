@@ -8,9 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.ashmitagarwal.ecommerce.entity.CatalogProducts;
-import com.ashmitagarwal.ecommerce.entity.Customers;
-import com.ashmitagarwal.ecommerce.entity.ShoppingCartItems;
+import com.ashmitagarwal.ecommerce.entity.CatalogProduct;
+import com.ashmitagarwal.ecommerce.entity.Customer;
+import com.ashmitagarwal.ecommerce.entity.ShoppingCartItem;
 import com.ashmitagarwal.ecommerce.repository.CatalogRepository;
 import com.ashmitagarwal.ecommerce.repository.CustomerRepository;
 import com.ashmitagarwal.ecommerce.repository.ShoppingCartRepository;
@@ -38,23 +38,23 @@ public class ShoppingCartService {
 		String productId = (String) productIdObj.get("productId");
 		System.out.println("Product id to add to cart :" + productId);
 			
-		Optional<CatalogProducts> product = catalogRepository.findById(productId);
+		Optional<CatalogProduct> product = catalogRepository.findById(productId);
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
 		System.out.println("Username of customer for add to cart :" + userDetails.getUsername());
 		
-		Optional<Customers> cust = customerRepository.findByEmail(userDetails.getUsername());
+		Optional<Customer> cust = customerRepository.findByEmail(userDetails.getUsername());
 		
 		if(product.isPresent() && cust.isPresent()) {
 			
-			Customers customer = cust.get();
+			Customer customer = cust.get();
 			System.out.println("Customer found in db : " + customer);
 			
-			CatalogProducts catalogProduct = product.get();
+			CatalogProduct catalogProduct = product.get();
 			System.out.println("Product found with this id: "  + catalogProduct);
 			
-			ShoppingCartItems cartItem = new ShoppingCartItems(catalogProduct, customer, 1);
+			ShoppingCartItem cartItem = new ShoppingCartItem(catalogProduct, customer, 1);
 			
 			if(shoppingCartRepository.save(cartItem) != null)
 				return true;

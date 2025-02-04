@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Customers {
+public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
@@ -56,11 +56,11 @@ public class Customers {
 		this.password = password;
 	}
 
-	public Customers() {
+	public Customer() {
 		
 	}
 	
-	public Customers(UserDTO userDto) {
+	public Customer(UserDTO userDto) {
 		this.fullName = userDto.getFullName();
 		this.email = userDto.getEmail();
 		this.password = userDto.getPassword();
