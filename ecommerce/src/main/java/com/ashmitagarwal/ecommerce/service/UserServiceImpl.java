@@ -33,16 +33,4 @@ public class UserServiceImpl implements UserService {
 			return "User registered successfully!";
 		}
 	}
-
-	@Override
-	public String loginUser(UserDTO userDto) {
-		
-		Optional<Customer> cust = customerRepository.findByEmail(userDto.getEmail());
-		if(cust.isPresent()) {
-		}
-		
-		return null;
-		
-	}
-
 }

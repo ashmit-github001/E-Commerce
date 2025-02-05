@@ -1,6 +1,5 @@
 function registerUser(event){
 	event.preventDefault(); // Would prevent values from being displayed in browser as default method is GET for form
-	console.log("here i am");
 	let form = document.forms.registerForm;
 	let formData = new FormData(form).entries();
 	fetch("http://localhost:8080/user/register",

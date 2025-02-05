@@ -5,7 +5,4 @@ import com.ashmitagarwal.ecommerce.dto.UserDTO;
 public interface UserService {
 	
 	public String registerUser(UserDTO userDto);
-	
-	public String loginUser(UserDTO userDto);
-
 }

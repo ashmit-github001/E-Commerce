@@ -9,6 +9,6 @@ import com.ashmitagarwal.ecommerce.entity.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
-	@Query(value = "SELECT * FROM customers c WHERE c.email=?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM customer c WHERE c.email=?1", nativeQuery = true)
 	public Optional<Customer> findByEmail(String email);
 }

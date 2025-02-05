@@ -11,6 +11,6 @@ import com.ashmitagarwal.ecommerce.entity.CatalogProduct;
 @Repository
 public interface CatalogRepository extends JpaRepository<CatalogProduct, String> {
 
-	@Query(value = "SELECT * FROM catalog_products u WHERE u.category=?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM catalog_product u WHERE u.category=?1", nativeQuery = true)
 	List<CatalogProduct> findAllByCategory(String keyword);
 }

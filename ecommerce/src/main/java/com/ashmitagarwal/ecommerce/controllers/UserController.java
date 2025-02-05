@@ -22,9 +22,4 @@ public class UserController {
 	public String registerUser(@RequestBody UserDTO userDto) {
 		return userService.registerUser(userDto);
 	}
-	
-	@PostMapping("/login")
-	public String loginUser(@RequestBody UserDTO userDto) {
-		return userService.loginUser(userDto);
-	}
 }
