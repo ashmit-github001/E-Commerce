@@ -18,7 +18,7 @@ public class ShoppingCartItem {
 	@JoinColumn(name = "product_id")
 	private CatalogProduct product;
 	
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	

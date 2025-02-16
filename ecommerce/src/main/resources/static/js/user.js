@@ -11,5 +11,5 @@ function registerUser(event){
 		}
 	})
 	.then(response => response.text())
-	.then(promise => displayContent(promise));
+	.then(promise => console.log(promise));
 };

@@ -1,5 +1,3 @@
-let productSelected = null;
-
 const displayProducts = (products, userKeywords) => {
 	console.log("Products = " + products);
 	const catalogDiv = document.querySelector('.products-container');
@@ -67,6 +65,17 @@ function addtoCart(product) {
 		})
 	})
 	.then(response => response.json())
-	.then(result => console.log(`Add to cart result for product ${product.name} is ${result}`));
-	
+	.then(result => {
+		if(result)
+			window.alert(`${product.name} added to your cart!`);
+		else
+			window.alert("Some error occurred. Unable to add item to your cart!")
+		});
+};
+
+function getUserCartItems() {
+	console.log("getUserCartItems function is called")
+	fetch("http://localhost:8080/cart/getForUser")
+		.then(response => response.json())
+		.then(items => console.log(items));
 };

@@ -1,13 +1,17 @@
 package com.ashmitagarwal.ecommerce.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.ashmitagarwal.ecommerce.dto.UserCartDto;
 import com.ashmitagarwal.ecommerce.entity.CatalogProduct;
 import com.ashmitagarwal.ecommerce.entity.Customer;
 import com.ashmitagarwal.ecommerce.entity.ShoppingCartItem;
@@ -60,6 +64,33 @@ public class ShoppingCartService {
 				return true;
 		}
 		return false;
+	}
+	
+	public ResponseEntity<List<UserCartDto>> getUserCart(String userEmail) {
+		
+		try {
+			Optional<Customer> customerOptional = customerRepository.findByEmail(userEmail);
+			List<ShoppingCartItem> userCartItems = new ArrayList<>();
+			if(customerOptional.isPresent()) {
+				userCartItems = customerOptional.get().getShoppingCartItemList();
+			}
+			else
+				return ResponseEntity.badRequest().body(null);
+			
+			List<UserCartDto> userCart = new ArrayList<UserCartDto>();
+
+			if(userCartItems != null) {
+				for(ShoppingCartItem cartEntry : userCartItems) {
+					UserCartDto userCartDto = new UserCartDto(cartEntry.getProduct(), cartEntry.getQuantity());
+					userCart.add(userCartDto);
+				}
+			}
+			
+			return ResponseEntity.ok(userCart);
+		} catch (Exception ex) {
+			throw ex;
+		}
+		
 	}
 
 }

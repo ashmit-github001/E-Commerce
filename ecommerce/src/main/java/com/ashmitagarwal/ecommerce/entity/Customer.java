@@ -1,12 +1,16 @@
 package com.ashmitagarwal.ecommerce.entity;
 
+import java.util.List;
+
 import com.ashmitagarwal.ecommerce.dto.UserDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Customer {
@@ -23,6 +27,9 @@ public class Customer {
 	
 	@Column(columnDefinition = "VARCHAR(500) NOT NULL")
 	private String password;
+	
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "customer", orphanRemoval = true)
+	private List<ShoppingCartItem> shoppingCartItemList;
 
 	public String getId() {
 		return id;
@@ -56,6 +63,14 @@ public class Customer {
 		this.password = password;
 	}
 
+	public List<ShoppingCartItem> getShoppingCartItemList() {
+		return shoppingCartItemList;
+	}
+
+	public void setShoppingCartItemList(List<ShoppingCartItem> shoppingCartItemList) {
+		this.shoppingCartItemList = shoppingCartItemList;
+	}
+
 	public Customer() {
 		
 	}
@@ -64,5 +79,6 @@ public class Customer {
 		this.fullName = userDto.getFullName();
 		this.email = userDto.getEmail();
 		this.password = userDto.getPassword();
+		this.shoppingCartItemList =  null;
 	}
 }
